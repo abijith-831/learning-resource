@@ -36,8 +36,8 @@ const Page = () => {
       threshold : 0.1
     }
 
-    const observerCallback = (entries:any , observer:any)=>{
-      entries.forEach((entry:any)=>{
+    const observerCallback = (entries:IntersectionObserverEntry[] , observer:IntersectionObserver)=>{
+      entries.forEach((entry:IntersectionObserverEntry)=>{
         if(entry.isIntersecting){
           const service =  entry.target
           const imgContainer  = service.querySelector('.img')
