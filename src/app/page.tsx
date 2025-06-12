@@ -15,7 +15,6 @@ gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
 
 const Page = () => {
-  
 
   const router = useRouter();
 
@@ -123,13 +122,13 @@ const Page = () => {
     <div ref={container} className="min-h-screen" style={{ scrollBehavior: 'smooth' }}>
         <div className='bg-gradient-to-br from-black via-black bg-black text-white flex flex-col md:flex-row items-center justify-between p-8 py-30 px-16 min-h-screen'>
           <div className='md:w-2/4   text-center md:text-left space-y-4'>
-            <motion.h1 initial={{ x: -100, opacity: 0 }} animate={{ x: 0, opacity: 4 }}transition={{ duration: 0.3 }} className='hero-learn text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold'> <span className='font-bold text-white bg-clip-text '>  Learn </span> Today, </motion.h1>
-            <motion.h1 initial={{ x: -100, opacity: 0 }} animate={{ x: 0, opacity: 4 }}transition={{ duration: 0.6 }} className='hero-lead text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold'><span className='font-bold text-white'>Lead</span> Tomorrow,</motion.h1>
-            <motion.h1 initial={{ x: -100, opacity: 0 }} animate={{ x: 0, opacity: 4 }}transition={{ duration: 0.9 }} className='hero-succeed text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold'><span className='font-bold bg-gradient-to-r from-yellow-400 via-yellow-600 to-red-500 bg-clip-text text-transparent'> Succeed</span> Forever. </motion.h1>
+            <motion.h1 initial={{ x: -100, opacity: 0 }} animate={{ x: 0, opacity: 1 }}transition={{ duration: 0.3 }} className='hero-learn text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold'> <span className='font-bold text-white bg-clip-text '>  Learn </span> Today, </motion.h1>
+            <motion.h1 initial={{ x: -100, opacity: 0 }} animate={{ x: 0, opacity: 1 }}transition={{ duration: 0.6 }} className='hero-lead text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold'><span className='font-bold text-white'>Lead</span> Tomorrow,</motion.h1>
+            <motion.h1 initial={{ x: -100, opacity: 0 }} animate={{ x: 0, opacity: 1 }}transition={{ duration: 0.9 }} className='hero-succeed text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold'><span className='font-bold bg-gradient-to-r from-yellow-400 via-yellow-600 to-red-500 bg-clip-text text-transparent'> Succeed</span> Forever. </motion.h1>
           </div>
           
           <div className="hero-image w-[250px] sm:w-[300px] md:w-2/4 relative h-[250px] sm:h-[300px] lg:h-[400px] lg:w-[400px] rounded-lg overflow-hidden">
-            <motion.img initial={{ x: -100, opacity: 0 }} animate={{ x: 0, opacity: 4 }}transition={{ duration: 0.9 }} src="/bgg.jpg" alt="Logo"  className="object-contain"/>
+            <motion.img initial={{ x: -100, opacity: 0 }} animate={{ x: 0, opacity: 1 }}transition={{ duration: 0.9 }} src="/bgg.jpg" alt="Logo"  className="object-contain"/>
           </div>
 
         </div>

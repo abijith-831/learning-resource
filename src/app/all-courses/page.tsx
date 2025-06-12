@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import courses from '../../data/courses'
 
-const page = () => {
+const AllCourses = () => {
 
   const [isModalOpen , setIsModalOpen] = useState(false)
   const uniqueCategories = [...new Set(courses.map(course => course.category))];
@@ -217,4 +217,4 @@ const page = () => {
   )
 }
 
-export default page
+export default AllCourses
