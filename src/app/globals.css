@@ -1,26 +1,110 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@font-face {
+    font-family: 'PP Neue Montreal';
+    src: url('/fonts/PPNeueMachina-Regular.otf') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
   }
+  
+
+  
+  html, body {
+    font-family: 'PP Neue Montreal', sans-serif;
+  }
+
+
+.container{
+    width: 100%;
+    height: 100%;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.service-info h1{
+    color: white;
+    font-weight: 500;
+    font-family: 'PP Neue Montreal', sans-serif;
+}
+
+.service-info p {
+    color: white;
+    font-weight: 400;
+    line-height: 150%;
+
+    font-family: 'PP Neue Montreal', sans-serif;
+}
+
+.service-img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.services{
+    background-color: black;
+    padding: 8em 2em;
+    display: flex;
+    flex-direction: column;
+}
+
+.services-header{
+     width: 100%;
+     display: flex;
+     gap: 4em;
+}
+
+.services-header .col:nth-child(1){
+    flex:2;
+}
+
+.services-header .col:nth-child(2){
+    flex:5;
+    padding: 1rem;
+}
+
+.service{
+    display: flex;
+    gap:2rem;
+    height: 100%;
+    border-top: 1px solid   rgba(255, 255, 255, 0.2);
+}
+
+.service-info{
+    flex: 2;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1em;
+}
+
+.service-img{
+    flex: 5;
+    width: 100%;
+    height: 100%;
+    padding: 1em;   
+} 
+
+.img{
+    width: 30%;
+    height: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+html.lenis , html.lenis body{
+    height: 500vh;
+}
+
+.lenis.lenis-smooth{
+    scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent]{
+    overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped{
+    overflow:hidden;
 }
