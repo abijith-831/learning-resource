@@ -48,8 +48,8 @@ const Page = () => {
             end : "top top",
             scrub : true,
             onUpdate : (self)=>{
-              let progress = self.progress;
-              let newWidth = 30 + 70 * progress
+              const progress = self.progress;
+              const newWidth = 30 + 70 * progress
               gsap.to(imgContainer,{
                 width:newWidth + '%',
                 duration : 0.1,
@@ -64,8 +64,8 @@ const Page = () => {
             end : "top top",
             scrub : true,
             onUpdate : (self)=>{
-              let progress = self.progress;
-              let newHeight = 150 + 300 * progress
+              const progress = self.progress;
+              const newHeight = 150 + 300 * progress
               gsap.to(imgContainer,{
                 height:newHeight + 'px',
                 duration : 0.1,
@@ -87,36 +87,6 @@ const Page = () => {
 
   const featured = courses.slice(0, 3);
   const container = useRef(null);
-
-
-  
-  const data = [
-    {
-      title: "Trending Courses",
-      color :'bg-white',
-      description:
-        "Stay ahead with the latest and most in-demand courses carefully curated to fit your learning needs. From web development to business strategies, access a wide range of updated courses designed to keep you relevant in today's dynamic market.",
-    },
-    {
-      title: "Professional Educators",
-      color:'bg-blue-500',
-      description:
-        "Learn from the best in the industry with experts who bring practical insights and years of experience. Our educators go beyond theory, offering real-world applications to empower your learning journey.",
-    },
-    {
-      title: "Progress Tracking",
-      color : 'bg-yellow-500',
-      description:
-        "Monitor your journey and achievements with detailed insights into your growth. Track completed courses, test scores, and milestones to stay motivated and focused on your goals.",
-    },
-    {
-      title: "One-on-One Interaction with Educators",
-      color : 'bg-gray-500',
-      description:
-        "Get personalized guidance and mentorship from dedicated educators. Engage in meaningful one-on-one sessions tailored to your learning pace and goals.",
-    },
-  ];
-
 
   return (
     <div ref={container} className="min-h-screen" style={{ scrollBehavior: 'smooth' }}>
