@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+html {
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+
 @font-face {
     font-family: 'PP Neue Montreal';
     src: url('/fonts/PPNeueMachina-Regular.otf') format('woff2');
@@ -105,4 +110,16 @@
 
 .lenis.lenis-stopped{
     overflow:hidden;
+}
+
+  
+
+.circle {
+    position: fixed;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transition: background-color 0.2s ease;
 }

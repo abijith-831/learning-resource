@@ -11,7 +11,7 @@ const Navbar = () => {
   const toggleMenu = () => setIsOpen(!isOpen);
 
   return (
-    <div className="bg-white text-white px-[60px] py-[10px] shadow-[0_4px_20px_rgba(0,0,0,0.2)] border-2 border-transparent">
+    <div className="navbar bg-white text-white px-[60px] py-[10px] shadow-[0_4px_20px_rgba(0,0,0,0.2)] border-2 border-transparent">
       <div className="flex justify-between items-center">
       <div className="relative w-[150px] h-[60px]">
           <Image src="/logo.png" alt="Logo" fill className="object-contain" />

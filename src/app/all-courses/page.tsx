@@ -1,10 +1,12 @@
 "use client";
 import React, { useEffect, useState } from 'react'
 import courses from '../../data/courses'
+import { Heart } from 'lucide-react';
 
 const AllCourses = () => {
 
   const [isModalOpen , setIsModalOpen] = useState(false)
+  const [likedCourses, setLikedCourses] = useState<number[]>([]);
   const uniqueCategories = [...new Set(courses.map(course => course.category))];
 
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -52,7 +54,24 @@ const AllCourses = () => {
     return 0;
   });
 
-  console.log('eewer',sortedCourses);
+  const toggleLike = (id: number) => {
+    setLikedCourses((prev) => {
+      const updated = prev.includes(id)
+        ? prev.filter((courseId) => courseId !== id)
+        : [...prev, id];
+  
+      localStorage.setItem("likedCourses", JSON.stringify(updated)); // ✅ Save to localStorage
+      return updated;
+    });
+  };
+
+  
+  useEffect(() => {
+    const storedLikes = localStorage.getItem("likedCourses");
+    if (storedLikes) {
+      setLikedCourses(JSON.parse(storedLikes));
+    }
+  }, []);
   
   
 
@@ -106,30 +125,61 @@ const AllCourses = () => {
 
 
                 <div className="grid gap-8 md:grid-cols-2 px-8 pt-4 lg:grid-cols-3">
-                  {sortedCourses.length > 0 ? (
-                                    sortedCourses.map((course) => (
-                                      <a key={course.id} href={course.url} target='_blank' rel='noopener noreferrer'>
-                                        <div  key={course.id}  className="relative bg-white/20 backdrop-blur-lg p-4 rounded-xl shadow-lg border border-white/10 text-white overflow-hidden">
-                                          <div className="absolute inset-0 rounded-xl bg-cover bg-center z-0"style={{ backgroundImage: `url(${course.thumbnailUrl})` }}></div>
-                                          <div className="absolute inset-0 bg-black/40 backdrop-blur-sm rounded-xl z-0"></div>
-                                          <div className="relative z-10 flex flex-col items-center">
-                                            <img src={course.thumbnailUrl}  alt={course.title} className="w-24 h-24 object-cover rounded-full border-4 border-white shadow-md mb-4" />
-                    
-                                            <h2 className="font-bold text-lg text-center">{course.title}</h2>
-                                            <p className="text-sm font-bold text-white">
-                                              {course.category} | {course.type}
-                                            </p>
-                                            <p className="text-sm font-bold text-white">{course.duration}</p>
-                                          </div>
-                                        </div>
-                    
-                                      </a>
-                                    ))
-                  ) : (
-                    <div className="col-span-full h-[500px]  text-white text-center text-xl py-12 px-20">
-                    No results found for the selected filters.
-                  </div>
-                  )}
+                {sortedCourses.length > 0 ? (
+  sortedCourses.map((course: any) => {
+    const isLiked = likedCourses.includes(course.id);
+
+    return (
+      <div
+        key={course.id}
+        className="relative bg-white/20 backdrop-blur-lg p-4 rounded-xl shadow-lg border border-white/10 text-white overflow-hidden"
+      >
+        <div
+          className="absolute inset-0 rounded-xl bg-cover bg-center z-0"
+          style={{ backgroundImage: `url(${course.thumbnailUrl})` }}
+        ></div>
+        <div className="absolute inset-0 bg-black/40 backdrop-blur-sm rounded-xl z-0"></div>
+
+        <div className="relative z-10 flex flex-col items-center">
+          <img
+            src={course.thumbnailUrl}
+            alt={course.title}
+            className="w-24 h-24 object-cover rounded-full border-4 border-white shadow-md mb-4"
+          />
+
+          <h2 className="font-bold text-lg text-center">{course.title}</h2>
+          <p className="text-sm font-bold text-white">
+            {course.category} | {course.type}
+          </p>
+
+          {/* Heart Icon */}
+          <div className="absolute top-1 right-1 z-20">
+            <button onClick={() => toggleLike(course.id)} aria-label="Toggle like">
+              <Heart
+                size={28}
+                className={`transition-all duration-300 ${
+                  isLiked ? "fill-[url(#gradient)] text-transparent" : "text-white"
+                }`}
+              />
+            </button>
+
+            <svg width="0" height="0">
+              <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#ff5f6d" />
+                <stop offset="100%" stopColor="#ffc371" />
+              </linearGradient>
+            </svg>
+          </div>
+        </div>
+      </div>
+    );
+  })
+) : (
+  <div className="col-span-full h-[500px] text-white text-center text-xl py-12 px-20">
+    No results found for the selected filters.
+  </div>
+)}
+
 
               </div>
              

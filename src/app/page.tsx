@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import courses from '../data/courses'
 import { motion } from 'framer-motion'
 import gsap from "gsap";
@@ -7,6 +7,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
 import Lenis from "@studio-freight/lenis";
 import { useRouter } from 'next/navigation';
+import { Heart } from 'lucide-react';
+
 
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
@@ -15,6 +17,28 @@ gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
 
 const Page = () => {
+  const [likedCourses, setLikedCourses] = useState<number[]>([]);
+
+  const toggleLike = (id: number) => {
+    setLikedCourses((prev) => {
+      const updated = prev.includes(id)
+        ? prev.filter((courseId) => courseId !== id)
+        : [...prev, id];
+  
+      localStorage.setItem("likedCourses", JSON.stringify(updated)); // ✅ Save to localStorage
+      return updated;
+    });
+  };
+
+  
+  useEffect(() => {
+    const storedLikes = localStorage.getItem("likedCourses");
+    if (storedLikes) {
+      setLikedCourses(JSON.parse(storedLikes));
+    }
+  }, []);
+
+  
 
   const router = useRouter();
 
@@ -91,6 +115,7 @@ const Page = () => {
 
   return (
     <div ref={container} className="min-h-screen" style={{ scrollBehavior: 'smooth' }}>
+      
         <div className='bg-gradient-to-br from-black via-black bg-black text-white flex flex-col md:flex-row items-center justify-between p-8 py-30 px-16 min-h-screen'>
           <div className='md:w-2/4   text-center md:text-left space-y-4'>
             <motion.h1 initial={{ x: -100, opacity: 0 }} animate={{ x: 0, opacity: 1 }}transition={{ duration: 0.3 }} className='hero-learn text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold'> <span className='font-bold text-white bg-clip-text '>  Learn </span> Today, </motion.h1>
@@ -159,23 +184,43 @@ const Page = () => {
                   TOP COURSES
                 </h1>
               </div>
-
               <div className="grid gap-6 md:grid-cols-2 px-6 pt-4 lg:grid-cols-3">
-                {featured.map((course) => (
-                  <div  key={course.id}  className="relative bg-white/20 backdrop-blur-lg p-4 rounded-xl shadow-lg border border-white/10 text-white overflow-hidden">
-                    <div className="absolute inset-0 rounded-xl bg-cover bg-center z-0"style={{ backgroundImage: `url(${course.thumbnailUrl})` }}></div>
+            {featured.map((course) => {
+            const isLiked = likedCourses.includes(course.id); 
+
+                return (
+                  <div key={course.id} className="relative bg-white/20 backdrop-blur-lg p-4 rounded-xl shadow-lg border border-white/10 text-white overflow-hidden" >
+                    <div className="absolute inset-0 rounded-xl bg-cover bg-center z-0" style={{ backgroundImage: `url(${course.thumbnailUrl})` }}></div>
                     <div className="absolute inset-0 bg-black/40 backdrop-blur-sm rounded-xl z-0"></div>
+
                     <div className="relative z-10 flex flex-col items-center">
-                      <img src={course.thumbnailUrl}  alt={course.title} className="w-24 h-24 object-cover rounded-full border-4 border-white shadow-md mb-4" />
+                      <img src={course.thumbnailUrl} alt={course.title} className="w-24 h-24 object-cover rounded-full border-4 border-white shadow-md mb-4" />
 
                       <h2 className="font-bold text-lg text-center">{course.title}</h2>
                       <p className="text-sm font-bold text-white">
                         {course.category} | {course.type}
                       </p>
+
+                      {/* Heart Icon */}
+                      <div className='absolute top-1 right-1 z-20'> 
+                        <button onClick={() => toggleLike(course.id)} aria-label="Toggle like">
+                          <Heart size={28} className={`transition-all duration-300 ${ isLiked  ? "fill-[url(#gradient)] text-transparent": "text-white"}`}/>
+                        </button>
+
+                        <svg width="0" height="0">
+                          <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stopColor="#ff5f6d" />
+                            <stop offset="100%" stopColor="#ffc371" />
+                          </linearGradient>
+                        </svg>
+
+                      </div>
                     </div>
                   </div>
-                ))}
-              </div>
+            );
+          })}
+        </div>
+
               <h3 onClick={() => router.push('/all-courses')} className="text-white font-bold border border-white px-6 py-2 rounded-full cursor-pointer hover:bg-white hover:text-black transition duration-300 w-max mx-auto mt-6">
                 SHOW ALL COURSES
               </h3>
