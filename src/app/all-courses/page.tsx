@@ -2,6 +2,15 @@
 import React, { useEffect, useState } from 'react'
 import courses from '../../data/courses'
 import { Heart } from 'lucide-react';
+interface Course {
+  id: number;
+  title: string;
+  category: string;
+  type: string;
+  url: string;
+  thumbnailUrl: string;
+  duration: string;
+}
 
 const AllCourses = () => {
 
@@ -126,7 +135,7 @@ const AllCourses = () => {
 
                 <div className="grid gap-8 md:grid-cols-2 px-8 pt-4 lg:grid-cols-3">
                 {sortedCourses.length > 0 ? (
-  sortedCourses.map((course: any) => {
+  sortedCourses.map((course: Course) => {
     const isLiked = likedCourses.includes(course.id);
 
     return (
