@@ -1,9 +1,9 @@
+"use client";
 interface TrailCircle extends HTMLDivElement {
   x: number;
   y: number;
 }
 
-"use client";
 import { useEffect } from "react";
 
 const colors = Array(20).fill("#ffffff");
