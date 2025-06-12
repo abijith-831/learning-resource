@@ -29,7 +29,7 @@ const Page = () => {
 
     gsap.ticker.lagSmoothing(0);
 
-    const services =  gsap.utils.toArray('.service')
+    const services =  gsap.utils.toArray('.service') as HTMLElement[]
     const observerOprions = {
       root : null,
       rootMargin :'0px',
@@ -78,11 +78,12 @@ const Page = () => {
         }
       })
     }
-    const observer = new IntersectionObserver(observerCallback , observerOprions)
-    services.forEach((service:any)=>{
-      observer.observe(service)
-    })
-    
+
+    const observer = new IntersectionObserver(observerCallback, observerOprions);
+
+    services.forEach((service) => {
+      observer.observe(service);
+    });
   }, []);
 
   const featured = courses.slice(0, 3);
